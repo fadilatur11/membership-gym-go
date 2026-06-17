@@ -1,0 +1,1587 @@
+basePath: /api
+definitions:
+  backend.AssignWorkoutTemplateRequest:
+    properties:
+      name:
+        example: Jadwal Budi - Beginner 5 Days
+        type: string
+      workout_template_public_id:
+        example: template-public-id
+        type: string
+    required:
+    - workout_template_public_id
+    type: object
+  backend.CreateExpenseCategoryRequest:
+    properties:
+      name:
+        example: Listrik
+        type: string
+    required:
+    - name
+    type: object
+  backend.CreateExpenseRequest:
+    properties:
+      amount:
+        example: 500000
+        minimum: 0
+        type: integer
+      description:
+        example: Token listrik
+        type: string
+      expense_category_public_id:
+        example: category-public-id
+        type: string
+      expense_date:
+        example: "2026-06-16"
+        type: string
+      status:
+        example: approved
+        type: string
+      title:
+        example: Bayar listrik Juni
+        type: string
+    required:
+    - amount
+    - expense_category_public_id
+    - title
+    type: object
+  backend.CreateGymSubscriptionRequest:
+    properties:
+      auto_renew:
+        example: false
+        type: boolean
+      notes:
+        example: Owner subscribe paket Premium
+        type: string
+      payment_method:
+        example: transfer
+        type: string
+      saas_plan_public_id:
+        example: 00000000-0000-4000-8000-000000000102
+        type: string
+      start_date:
+        example: "2026-06-16"
+        type: string
+      status:
+        example: paid
+        type: string
+    required:
+    - saas_plan_public_id
+    type: object
+  backend.CreateMemberRequest:
+    properties:
+      address:
+        example: Probolinggo
+        type: string
+      birth_date:
+        example: "1998-01-10"
+        type: string
+      email:
+        example: budi@email.com
+        type: string
+      emergency_contact_name:
+        example: Siti
+        type: string
+      emergency_contact_phone:
+        example: "08999999999"
+        type: string
+      full_name:
+        example: Budi Santoso
+        type: string
+      gender:
+        example: male
+        type: string
+      joined_at:
+        example: "2026-06-16"
+        type: string
+      member_code:
+        example: MBR-001
+        type: string
+      notes:
+        example: Member baru
+        type: string
+      phone:
+        example: "08123456789"
+        type: string
+    required:
+    - full_name
+    - member_code
+    type: object
+  backend.CreateMembershipPackageRequest:
+    properties:
+      description:
+        example: Membership 30 hari
+        type: string
+      duration_days:
+        example: 30
+        minimum: 1
+        type: integer
+      name:
+        example: Bulanan
+        type: string
+      price:
+        example: 300000
+        minimum: 0
+        type: integer
+    required:
+    - duration_days
+    - name
+    type: object
+  backend.CreateMuscleGroupRequest:
+    properties:
+      code:
+        example: chest
+        type: string
+      description:
+        example: Otot dada
+        type: string
+      name:
+        example: Chest
+        type: string
+    required:
+    - code
+    - name
+    type: object
+  backend.CreatePaymentRequest:
+    properties:
+      discount_amount:
+        example: 50000
+        type: integer
+      member_public_id:
+        example: member-public-id
+        type: string
+      membership_package_public_id:
+        example: package-public-id
+        type: string
+      notes:
+        example: Promo member lama
+        type: string
+      payment_method:
+        enum:
+        - cash
+        - transfer
+        - qris
+        example: cash
+        type: string
+      start_date:
+        example: "2026-06-16"
+        type: string
+      status:
+        example: paid
+        type: string
+    required:
+    - member_public_id
+    - membership_package_public_id
+    - payment_method
+    type: object
+  backend.CreateReminderRuleRequest:
+    properties:
+      channel:
+        example: whatsapp
+        type: string
+      days_before_expiry:
+        example: 3
+        minimum: 0
+        type: integer
+      message_template:
+        example: Halo {member_name}, membership kamu akan habis pada {end_date}.
+        type: string
+      name:
+        example: Reminder H-3
+        type: string
+    required:
+    - message_template
+    - name
+    type: object
+  backend.CreateSubscriptionRequest:
+    properties:
+      member_public_id:
+        example: member-public-id
+        type: string
+      membership_package_public_id:
+        example: package-public-id
+        type: string
+      start_date:
+        example: "2026-06-16"
+        type: string
+    required:
+    - member_public_id
+    - membership_package_public_id
+    type: object
+  backend.CreateUserRequest:
+    properties:
+      email:
+        example: andi@gym.com
+        type: string
+      name:
+        example: Andi Trainer
+        type: string
+      password:
+        example: secret123
+        minLength: 6
+        type: string
+      role:
+        enum:
+        - owner
+        - admin
+        - cashier
+        - trainer
+        example: trainer
+        type: string
+    required:
+    - email
+    - name
+    - password
+    - role
+    type: object
+  backend.CreateWeightLogRequest:
+    properties:
+      measured_date:
+        example: "2026-06-16"
+        type: string
+      notes:
+        example: Ditimbang setelah latihan
+        type: string
+      weight_kg:
+        example: 68.5
+        type: number
+    required:
+    - measured_date
+    - weight_kg
+    type: object
+  backend.CreateWorkoutTemplateRequest:
+    properties:
+      description:
+        example: Jadwal latihan pemula 5 hari
+        type: string
+      name:
+        example: Beginner 5 Days
+        type: string
+    required:
+    - name
+    type: object
+  backend.FinishWorkoutSessionRequest:
+    properties:
+      notes:
+        example: Latihan selesai, cukup berat
+        type: string
+      qr_token:
+        example: qr-token-random
+        type: string
+    required:
+    - qr_token
+    type: object
+  backend.LoginRequest:
+    properties:
+      email:
+        example: owner@gym.com
+        type: string
+      gym_public_id:
+        example: 00000000-0000-4000-8000-000000000001
+        type: string
+      password:
+        example: password
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  backend.LogoutRequest:
+    properties:
+      refresh_token:
+        example: refresh-token
+        type: string
+    required:
+    - refresh_token
+    type: object
+  backend.ManualCheckinRequest:
+    properties:
+      member_public_id:
+        example: member-public-id
+        type: string
+      notes:
+        example: Manual check-in karena kamera bermasalah
+        type: string
+    required:
+    - member_public_id
+    type: object
+  backend.ManualWorkoutSessionRequest:
+    properties:
+      duration_seconds:
+        example: 3600
+        minimum: 1
+        type: integer
+      muscle_group_public_id:
+        example: chest-public-id
+        type: string
+      notes:
+        example: Input manual oleh trainer
+        type: string
+      title:
+        example: Chest Day
+        type: string
+      workout_date:
+        example: "2026-06-16"
+        type: string
+    required:
+    - duration_seconds
+    - title
+    - workout_date
+    type: object
+  backend.PaymentActionRequest:
+    properties:
+      notes:
+        example: Salah input pembayaran
+        type: string
+    type: object
+  backend.PublicCreateWeightLogRequest:
+    properties:
+      measured_date:
+        example: "2026-06-16"
+        type: string
+      notes:
+        example: Setelah latihan
+        type: string
+      qr_token:
+        example: qr-token-random
+        type: string
+      weight_kg:
+        example: 68.5
+        type: number
+    required:
+    - measured_date
+    - qr_token
+    - weight_kg
+    type: object
+  backend.RefreshTokenRequest:
+    properties:
+      refresh_token:
+        example: refresh-token
+        type: string
+    required:
+    - refresh_token
+    type: object
+  backend.RegisterOwnerRequest:
+    properties:
+      gym_address:
+        example: Jl. Contoh No. 1
+        type: string
+      gym_email:
+        example: admin@stronggym.com
+        type: string
+      gym_name:
+        example: Strong Gym
+        type: string
+      gym_phone:
+        example: "08123456789"
+        type: string
+      owner_email:
+        example: owner@stronggym.com
+        type: string
+      owner_name:
+        example: Budi Owner
+        type: string
+      owner_password:
+        example: secret123
+        minLength: 6
+        type: string
+    required:
+    - gym_name
+    - owner_email
+    - owner_name
+    - owner_password
+    type: object
+  backend.ReplaceWorkoutDaysRequest:
+    properties:
+      days:
+        items:
+          $ref: '#/definitions/backend.WorkoutDayRequest'
+        type: array
+    required:
+    - days
+    type: object
+  backend.ScanCheckinRequest:
+    properties:
+      qr_token:
+        example: qr-token-random
+        type: string
+    required:
+    - qr_token
+    type: object
+  backend.StartWorkoutSessionRequest:
+    properties:
+      muscle_group_public_id:
+        example: chest-public-id
+        type: string
+      qr_token:
+        example: qr-token-random
+        type: string
+      schedule_day_public_id:
+        example: schedule-day-public-id
+        type: string
+      title:
+        example: Chest Manual Workout
+        type: string
+    required:
+    - qr_token
+    type: object
+  backend.UpdateExpenseCategoryRequest:
+    properties:
+      is_active:
+        example: true
+        type: boolean
+      name:
+        example: Operasional
+        type: string
+    type: object
+  backend.UpdateExpenseRequest:
+    properties:
+      amount:
+        example: 550000
+        type: integer
+      description:
+        example: Token listrik
+        type: string
+      expense_date:
+        example: "2026-06-16"
+        type: string
+      status:
+        example: approved
+        type: string
+      title:
+        example: Bayar listrik Juni Updated
+        type: string
+    type: object
+  backend.UpdateGymRequest:
+    properties:
+      address:
+        example: Jl. Contoh No. 1
+        type: string
+      currency:
+        example: IDR
+        type: string
+      email:
+        example: admin@gym.com
+        type: string
+      name:
+        example: Gym Sehat
+        type: string
+      phone:
+        example: "08123456789"
+        type: string
+      timezone:
+        example: Asia/Jakarta
+        type: string
+    type: object
+  backend.UpdateMemberRequest:
+    properties:
+      address:
+        example: Probolinggo
+        type: string
+      email:
+        example: budi.updated@email.com
+        type: string
+      emergency_contact_name:
+        example: Siti
+        type: string
+      emergency_contact_phone:
+        example: "08999999999"
+        type: string
+      full_name:
+        example: Budi Santoso Updated
+        type: string
+      gender:
+        example: male
+        type: string
+      notes:
+        example: Updated notes
+        type: string
+      phone:
+        example: "08123456789"
+        type: string
+      status:
+        example: active
+        type: string
+    type: object
+  backend.UpdateMembershipPackageRequest:
+    properties:
+      description:
+        example: Promo bulan ini
+        type: string
+      duration_days:
+        example: 30
+        type: integer
+      is_active:
+        example: true
+        type: boolean
+      name:
+        example: Bulanan Promo
+        type: string
+      price:
+        example: 250000
+        type: integer
+    type: object
+  backend.UpdateMuscleGroupRequest:
+    properties:
+      code:
+        example: chest
+        type: string
+      description:
+        example: Fokus otot dada
+        type: string
+      is_active:
+        example: true
+        type: boolean
+      name:
+        example: Chest
+        type: string
+    type: object
+  backend.UpdateReminderRuleRequest:
+    properties:
+      channel:
+        example: whatsapp
+        type: string
+      days_before_expiry:
+        example: 7
+        type: integer
+      is_active:
+        example: true
+        type: boolean
+      message_template:
+        example: Halo {member_name}, membership kamu akan habis pada {end_date}.
+        type: string
+      name:
+        example: Reminder H-7
+        type: string
+    type: object
+  backend.UpdateUserRequest:
+    properties:
+      email:
+        example: andi.updated@gym.com
+        type: string
+      is_active:
+        example: true
+        type: boolean
+      name:
+        example: Andi Updated
+        type: string
+      role:
+        example: cashier
+        type: string
+    type: object
+  backend.UpdateWorkoutTemplateRequest:
+    properties:
+      description:
+        example: Updated description
+        type: string
+      is_active:
+        example: true
+        type: boolean
+      name:
+        example: Beginner 6 Days
+        type: string
+    type: object
+  backend.WorkoutDayRequest:
+    properties:
+      day_of_week:
+        example: 1
+        maximum: 7
+        minimum: 1
+        type: integer
+      description:
+        example: Fokus latihan dada
+        type: string
+      is_rest_day:
+        example: false
+        type: boolean
+      muscle_group_public_id:
+        example: muscle-group-public-id
+        type: string
+      title:
+        example: Chest Day
+        type: string
+    required:
+    - day_of_week
+    - title
+    type: object
+info:
+  contact: {}
+  description: Gym Management SaaS backend API.
+  title: Gym Management SaaS API
+  version: "1.0"
+paths:
+  /v1/admin/auth/login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Login payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.LoginRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Login admin/staff
+      tags:
+      - Admin Auth
+  /v1/admin/auth/logout:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Logout payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.LogoutRequest'
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Logout admin/staff
+      tags:
+      - Admin Auth
+  /v1/admin/auth/profile:
+    get:
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Get authenticated profile
+      tags:
+      - Admin Auth
+  /v1/admin/auth/refresh:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Refresh token payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.RefreshTokenRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Refresh access token
+      tags:
+      - Admin Auth
+  /v1/admin/checkins/manual:
+    post:
+      parameters:
+      - description: Manual check-in payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.ManualCheckinRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Manual check-in
+      tags:
+      - Check-ins
+  /v1/admin/checkins/scan:
+    post:
+      parameters:
+      - description: QR scan payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.ScanCheckinRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Admin QR check-in
+      tags:
+      - Check-ins
+  /v1/admin/expense-categories:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: List expense categories
+      tags:
+      - Expense Categories
+    post:
+      parameters:
+      - description: Create expense category payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.CreateExpenseCategoryRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Create expense category
+      tags:
+      - Expense Categories
+  /v1/admin/expense-categories/{category_public_id}:
+    delete:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Deactivate expense category
+      tags:
+      - Expense Categories
+    patch:
+      parameters:
+      - description: Update expense category payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.UpdateExpenseCategoryRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Update expense category
+      tags:
+      - Expense Categories
+  /v1/admin/expenses:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: List expenses
+      tags:
+      - Expenses
+    post:
+      parameters:
+      - description: Create expense payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.CreateExpenseRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Create expense
+      tags:
+      - Expenses
+  /v1/admin/expenses/{expense_public_id}:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Detail expense
+      tags:
+      - Expenses
+    patch:
+      parameters:
+      - description: Update expense payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.UpdateExpenseRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Update expense
+      tags:
+      - Expenses
+  /v1/admin/expenses/{expense_public_id}/approve:
+    patch:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Approve expense
+      tags:
+      - Expenses
+  /v1/admin/expenses/{expense_public_id}/reject:
+    patch:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Reject expense
+      tags:
+      - Expenses
+  /v1/admin/gym/profile:
+    get:
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Get gym profile
+      tags:
+      - Gym
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: Gym profile payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.UpdateGymRequest'
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Update gym profile
+      tags:
+      - Gym
+  /v1/admin/gym/subscription:
+    get:
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Get current gym SaaS subscription
+      tags:
+      - SaaS Subscription
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Gym subscription payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.CreateGymSubscriptionRequest'
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Subscribe gym to a SaaS plan
+      tags:
+      - SaaS Subscription
+  /v1/admin/members:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: List members
+      tags:
+      - Members
+    post:
+      parameters:
+      - description: Create member payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.CreateMemberRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Create member
+      tags:
+      - Members
+  /v1/admin/members/{member_public_id}:
+    delete:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Deactivate member
+      tags:
+      - Members
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Detail member
+      tags:
+      - Members
+    patch:
+      parameters:
+      - description: Update member payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.UpdateMemberRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Update member
+      tags:
+      - Members
+  /v1/admin/membership-packages:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: List membership packages
+      tags:
+      - Membership Packages
+    post:
+      parameters:
+      - description: Create membership package payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.CreateMembershipPackageRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Create membership package
+      tags:
+      - Membership Packages
+  /v1/admin/membership-packages/{package_public_id}:
+    delete:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Deactivate membership package
+      tags:
+      - Membership Packages
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Detail membership package
+      tags:
+      - Membership Packages
+    patch:
+      parameters:
+      - description: Update membership package payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.UpdateMembershipPackageRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Update membership package
+      tags:
+      - Membership Packages
+  /v1/admin/payments:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: List payments
+      tags:
+      - Payments
+    post:
+      parameters:
+      - description: Create payment payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.CreatePaymentRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Create membership payment
+      tags:
+      - Payments
+  /v1/admin/payments/{payment_public_id}:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Detail payment
+      tags:
+      - Payments
+  /v1/admin/payments/{payment_public_id}/cancel:
+    patch:
+      parameters:
+      - description: Cancel payment payload
+        in: body
+        name: request
+        schema:
+          $ref: '#/definitions/backend.PaymentActionRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Cancel payment
+      tags:
+      - Payments
+  /v1/admin/payments/{payment_public_id}/refund:
+    patch:
+      parameters:
+      - description: Refund payment payload
+        in: body
+        name: request
+        schema:
+          $ref: '#/definitions/backend.PaymentActionRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Refund payment
+      tags:
+      - Payments
+  /v1/admin/reminder-logs:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: List reminder logs
+      tags:
+      - Reminder Logs
+  /v1/admin/reminder-logs/{log_public_id}/retry:
+    post:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Retry reminder log
+      tags:
+      - Reminder Logs
+  /v1/admin/reminder-rules:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: List reminder rules
+      tags:
+      - Reminder Rules
+    post:
+      parameters:
+      - description: Create reminder rule payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.CreateReminderRuleRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Create reminder rule
+      tags:
+      - Reminder Rules
+  /v1/admin/reminder-rules/{rule_public_id}:
+    delete:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Deactivate reminder rule
+      tags:
+      - Reminder Rules
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Detail reminder rule
+      tags:
+      - Reminder Rules
+    patch:
+      parameters:
+      - description: Update reminder rule payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.UpdateReminderRuleRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Update reminder rule
+      tags:
+      - Reminder Rules
+  /v1/admin/saas-plans:
+    get:
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: List SaaS subscription plans
+      tags:
+      - SaaS Subscription
+  /v1/admin/subscriptions:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: List subscriptions
+      tags:
+      - Subscriptions
+    post:
+      parameters:
+      - description: Create subscription payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.CreateSubscriptionRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Create manual subscription
+      tags:
+      - Subscriptions
+  /v1/admin/subscriptions/{subscription_public_id}:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Detail subscription
+      tags:
+      - Subscriptions
+  /v1/admin/subscriptions/{subscription_public_id}/cancel:
+    patch:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Cancel subscription
+      tags:
+      - Subscriptions
+  /v1/admin/subscriptions/{subscription_public_id}/expire:
+    patch:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Expire subscription
+      tags:
+      - Subscriptions
+  /v1/admin/users:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: List staff users
+      tags:
+      - Users
+    post:
+      parameters:
+      - description: Create user payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.CreateUserRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Create staff user
+      tags:
+      - Users
+  /v1/admin/users/{user_public_id}:
+    delete:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Deactivate staff user
+      tags:
+      - Users
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Detail staff user
+      tags:
+      - Users
+    patch:
+      parameters:
+      - description: Update user payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.UpdateUserRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Update staff user
+      tags:
+      - Users
+  /v1/auth/google:
+    get:
+      produces:
+      - application/json
+      responses: {}
+      summary: Get Google OAuth URL
+      tags:
+      - Public Auth
+  /v1/auth/google/callback:
+    get:
+      parameters:
+      - description: Google authorization code
+        in: query
+        name: code
+        required: true
+        type: string
+      - description: OAuth state
+        in: query
+        name: state
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Google OAuth callback
+      tags:
+      - Public Auth
+  /v1/auth/register-owner:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Register owner payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.RegisterOwnerRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Register new gym owner
+      tags:
+      - Public Auth
+  /v1/member/checkins/scan:
+    post:
+      parameters:
+      - description: Public QR scan payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.ScanCheckinRequest'
+      responses: {}
+      summary: Public QR check-in
+      tags:
+      - Public Member
+  /v2/admin/members/{member_public_id}/weight-logs:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: List member weight logs
+      tags:
+      - V2 Weight Logs
+    post:
+      parameters:
+      - description: Create weight log payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.CreateWeightLogRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Create member weight log
+      tags:
+      - V2 Weight Logs
+  /v2/admin/members/{member_public_id}/weight-logs/{weight_log_public_id}:
+    delete:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Delete member weight log
+      tags:
+      - V2 Weight Logs
+    patch:
+      parameters:
+      - description: Update weight log payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.CreateWeightLogRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Update member weight log
+      tags:
+      - V2 Weight Logs
+  /v2/admin/members/{member_public_id}/workout-schedules/{schedule_public_id}/days:
+    put:
+      parameters:
+      - description: Replace member schedule days payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.ReplaceWorkoutDaysRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Replace member workout schedule days
+      tags:
+      - V2 Workout Schedules
+  /v2/admin/members/{member_public_id}/workout-schedules/active:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Get active member workout schedule
+      tags:
+      - V2 Workout Schedules
+  /v2/admin/members/{member_public_id}/workout-schedules/assign-template:
+    post:
+      parameters:
+      - description: Assign template payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.AssignWorkoutTemplateRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Assign workout template to member
+      tags:
+      - V2 Workout Schedules
+  /v2/admin/members/{member_public_id}/workout-sessions:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: List member workout sessions
+      tags:
+      - V2 Workout Sessions
+  /v2/admin/members/{member_public_id}/workout-sessions/manual:
+    post:
+      parameters:
+      - description: Manual workout session payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.ManualWorkoutSessionRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Create manual workout session
+      tags:
+      - V2 Workout Sessions
+  /v2/admin/muscle-groups:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: List muscle groups
+      tags:
+      - V2 Muscle Groups
+    post:
+      parameters:
+      - description: Create muscle group payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.CreateMuscleGroupRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Create muscle group
+      tags:
+      - V2 Muscle Groups
+  /v2/admin/muscle-groups/{muscle_group_public_id}:
+    delete:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Deactivate muscle group
+      tags:
+      - V2 Muscle Groups
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Detail muscle group
+      tags:
+      - V2 Muscle Groups
+    patch:
+      parameters:
+      - description: Update muscle group payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.UpdateMuscleGroupRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Update muscle group
+      tags:
+      - V2 Muscle Groups
+  /v2/admin/reports/member-progress/{member_public_id}:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Member progress report
+      tags:
+      - V2 Reports
+  /v2/admin/reports/weight-progress:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Weight progress report
+      tags:
+      - V2 Reports
+  /v2/admin/reports/workout-consistency:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Workout consistency report
+      tags:
+      - V2 Reports
+  /v2/admin/workout-sessions:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: List workout sessions
+      tags:
+      - V2 Workout Sessions
+  /v2/admin/workout-templates:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: List workout templates
+      tags:
+      - V2 Workout Templates
+    post:
+      parameters:
+      - description: Create workout template payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.CreateWorkoutTemplateRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Create workout template
+      tags:
+      - V2 Workout Templates
+  /v2/admin/workout-templates/{template_public_id}:
+    delete:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Deactivate workout template
+      tags:
+      - V2 Workout Templates
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Detail workout template
+      tags:
+      - V2 Workout Templates
+    patch:
+      parameters:
+      - description: Update workout template payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.UpdateWorkoutTemplateRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Update workout template
+      tags:
+      - V2 Workout Templates
+  /v2/admin/workout-templates/{template_public_id}/days:
+    get:
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Get workout template days
+      tags:
+      - V2 Workout Templates
+    put:
+      parameters:
+      - description: Replace days payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.ReplaceWorkoutDaysRequest'
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Replace workout template days
+      tags:
+      - V2 Workout Templates
+  /v2/member/weight-logs:
+    post:
+      parameters:
+      - description: Create public weight log payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.PublicCreateWeightLogRequest'
+      responses: {}
+      summary: Create public weight log
+      tags:
+      - V2 Public Member
+  /v2/member/weight-logs/{qr_token}:
+    get:
+      responses: {}
+      summary: Public weight logs
+      tags:
+      - V2 Public Member
+  /v2/member/workout-schedule/{qr_token}:
+    get:
+      responses: {}
+      summary: Public weekly workout schedule
+      tags:
+      - V2 Public Member
+  /v2/member/workout-schedule/{qr_token}/today:
+    get:
+      responses: {}
+      summary: Public today workout schedule
+      tags:
+      - V2 Public Member
+  /v2/member/workout-sessions/{qr_token}:
+    get:
+      responses: {}
+      summary: Public workout history
+      tags:
+      - V2 Public Member
+  /v2/member/workout-sessions/{session_public_id}/finish:
+    post:
+      parameters:
+      - description: Finish workout payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.FinishWorkoutSessionRequest'
+      responses: {}
+      summary: Finish public workout session
+      tags:
+      - V2 Public Member
+  /v2/member/workout-sessions/start:
+    post:
+      parameters:
+      - description: Start workout payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/backend.StartWorkoutSessionRequest'
+      responses: {}
+      summary: Start public workout session
+      tags:
+      - V2 Public Member
+securityDefinitions:
+  BearerAuth:
+    description: 'Masukkan token dengan format: Bearer {access_token}'
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

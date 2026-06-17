@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS audit_logs;
+DROP TABLE IF EXISTS reminder_logs;
+DROP TABLE IF EXISTS reminder_rules;
+DROP TABLE IF EXISTS member_checkins;
+DROP TABLE IF EXISTS member_qrcodes;
+DROP TABLE IF EXISTS expenses;
+DROP TABLE IF EXISTS expense_categories;
+DROP TABLE IF EXISTS payments;
+DROP TABLE IF EXISTS subscriptions;
+DROP TABLE IF EXISTS membership_packages;
+DROP TABLE IF EXISTS members;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS gyms;
