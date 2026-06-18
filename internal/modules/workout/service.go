@@ -477,7 +477,7 @@ func (s *Service) CreateManualWorkoutSession(ctx context.Context, auth middlewar
 			return nil, err
 		}
 	}
-	rows, err := s.repo.InsertManualWorkoutSession(ctx, token.GeneratePublicID(), auth.GymID, memberID, muscleID, workoutDate, req.Title, req.Notes, req.DurationSeconds, auth.Role, auth.UserID)
+	rows, err := s.repo.InsertManualWorkoutSession(ctx, token.GeneratePublicID(), auth.GymID, memberID, muscleID, workoutDate, req.Title, req.Notes, req.DurationSeconds, adminWorkoutSource(auth.Role), auth.UserID)
 	if err != nil {
 		return nil, err
 	}
@@ -545,11 +545,18 @@ func (s *Service) CreateAdminWeightLog(ctx context.Context, auth middleware.Auth
 	if err != nil {
 		return nil, err
 	}
-	rows, err := s.repo.InsertAdminWeightLog(ctx, token.GeneratePublicID(), auth.GymID, memberID, measuredDate, req.WeightKG, req.Notes, auth.Role, auth.UserID)
+	rows, err := s.repo.InsertAdminWeightLog(ctx, token.GeneratePublicID(), auth.GymID, memberID, measuredDate, req.WeightKG, req.Notes, adminWorkoutSource(auth.Role), auth.UserID)
 	if err != nil {
 		return nil, err
 	}
 	return rows[0], nil
+}
+
+func adminWorkoutSource(role string) string {
+	if role == "trainer" {
+		return "trainer"
+	}
+	return "admin"
 }
 
 func (s *Service) UpdateAdminWeightLog(ctx context.Context, auth middleware.AuthUser, memberPublicID, weightLogPublicID string, req CreateWeightLogRequest) (map[string]any, error) {

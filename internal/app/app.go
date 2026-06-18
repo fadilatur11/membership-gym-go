@@ -11,6 +11,7 @@ import (
 	"membership-gym/docs"
 	"membership-gym/internal/middleware"
 	"membership-gym/internal/modules"
+	activitylogmodule "membership-gym/internal/modules/activity_log"
 	"membership-gym/internal/routes"
 )
 
@@ -19,7 +20,13 @@ func New(cfg config.Config, db *pgxpool.Pool, redisClient *redis.Client) *gin.En
 		gin.SetMode(gin.ReleaseMode)
 	}
 	router := gin.New()
-	router.Use(middleware.RequestIDMiddleware(), middleware.CORSMiddleware(), middleware.RecoveryMiddleware())
+	activityLogRepo := activitylogmodule.NewRepository(db)
+	router.Use(
+		middleware.RequestIDMiddleware(),
+		middleware.ActivityLogMiddleware(activityLogRepo),
+		middleware.CORSMiddleware(),
+		middleware.RecoveryMiddleware(),
+	)
 
 	router.GET("/health", func(ctx *gin.Context) {
 		ctx.JSON(200, gin.H{"success": true, "message": "OK", "data": gin.H{"status": "ok"}})

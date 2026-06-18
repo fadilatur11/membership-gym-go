@@ -9,6 +9,12 @@ const (
 	QueryAuditLogInsert         = `
 		INSERT INTO audit_logs (public_id, gym_id, user_id, action, entity_type, entity_id, payload, created_at)
 		VALUES ($1,$2,$3,$4,$5,$6,$7,NOW())`
+	QueryActivityLogInsert = `
+		INSERT INTO activity_logs (
+			gym_id, user_id, request_payload, response, curl,
+			status_code, status, response_time, created_at, updated_at
+		)
+		VALUES ($1,$2,$3::jsonb,$4::jsonb,$5,$6,$7,$8,NOW(),NOW())`
 	QueryResolveIDFormat = "SELECT id FROM %s WHERE gym_id=$1 AND public_id=$2"
 
 	QueryLoginUserBase = `

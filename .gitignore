@@ -22,6 +22,7 @@ instructions/
 coverage.*
 *.coverprofile
 profile.cov
+/test-results/
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
@@ -36,3 +37,4 @@ go.work.sum
 # Editor/IDE
 # .idea/
 # .vscode/
+scripts/
